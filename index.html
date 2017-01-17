@@ -17,7 +17,6 @@
 	      <a href="#" class="brand-logo deep-orange-text text-lighten-2 center">Cube Summation <small>By Carmoreno</small></a>
 	    </div>
 	</nav>
-	<!-- <div class="container"> -->
 		<br>
 		<br>
 		<br>
@@ -29,18 +28,29 @@
 						<form action="">
 							<div class="row">
 								<div class="input-field col s6">
-						          <input id="test" type="number" class="validate" ng-model="metaData.test">
+						          <input id="test" 
+						          type="number" 
+						          class="validate" 
+						          ng-model="metaData.test" 
+						          ng-disabled="metaData.test <= 0" 
+						          min="1" max="50" 
+						          required>
 						          <label for="test">Test</label>
 						        </div>
 						        <div class="input-field col s6">
-						          <input id="size_cube" type="number" class="validate" ng-model="metaData.size">
+						          <input id="size_cube" 
+						          type="number" 
+						          class="validate"
+						          ng-model="metaData.size"
+						          ng-disabled="metaData.test <= 0"
+						          min="1" max="100" 
+						          required>
 						          <label for="size_cube">Tamaño de Cubo</label>
 						        </div>
 							</div>
 							<div class="row">
 								<div class="col s12">
 									<div class="row" ng-repeat="obj in operations">
-										
 										<div class="input-field col s4">
 											<select class="browser-default" ng-options="item for item in optionSelect"
 											ng-model="obj.operation"></select>
@@ -49,9 +59,7 @@
 											<input id="numbers_operation" type="text" class="validate" ng-model="obj.numbers">
 						          			<label for="numbers_operation">1 1 1 3 3 3 5</label>
 										</div>
-									</div>
-									
-											
+									</div>		
 						        </div>
 						        <div class="col s12">
 									<div class="row">
@@ -61,7 +69,8 @@
   											data-position="right" 
   											data-delay="50" 
   											data-tooltip="Agregar nueva prueba"
-  											ng-click="addOperation()">
+  											ng-click="addOperation()"
+  											ng-disabled="operations.length >= 1000">
   											<i class="material-icons">add</i>
 											</a>
 										</div>    
@@ -81,7 +90,9 @@
 						</form>
 					</div>
 					<div class="card-action">
-		              <button class="btn waves-effect waves-light deep-orange lighten-2" ng-click="execute()">Calcular<i class="material-icons right">swap_horiz</i></button>
+		              <button class="btn waves-effect waves-light deep-orange lighten-2" 
+		              ng-click="execute()"
+		              ng-disabled="metaData.test <= 0">Calcular<i class="material-icons right">swap_horiz</i></button>
 					</div>
 				</div>
 			</div>
@@ -90,9 +101,10 @@
 				<div class="card blue-grey darken-1">
 		            <div class="card-content white-text">
 		              <span class="card-title">Resultados</span>
-		              <p>En esta sección se presentan los resultados de cada test</p>
-		               Metadata: {{metaData}}
-		               Operations: {{operations}}
+		              <p>En esta sección se presentan los resultados de cada test:</p>
+		               <!-- Metadata: {{metaData}}
+		               Operations: {{operations}} -->
+					  <p ng-repeat="item in solution track by $index">{{item}}</p>      
 		            </div>
 		        </div>
 			</div>
