@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="CubeSummation">
+<head>
+	<!--Import Google Icon Font-->
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="styles/materialize.min.css"  media="screen,projection"/>
+
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta charset="UTF-8">
+	<title>Cube Summation</title>
+</head>
+<body class="blue-grey darken-4" ng-controller="CubeController">
+	<nav>
+	    <div class="nav-wrapper blue-grey darken-1">
+	      <a href="#" class="brand-logo deep-orange-text text-lighten-2 center">Cube Summation <small>By Carmoreno</small></a>
+	    </div>
+	</nav>
+	<!-- <div class="container"> -->
+		<br>
+		<br>
+		<br>
+		<div class="row">
+			<div class="col l7 m7">
+				<div class="card blue-grey darken-1">
+					<div class="card-content withe-text">
+						<span class="card-title" style="color:#fff;">Entrada de Datos</span>
+						<form action="">
+							<div class="row">
+								<div class="input-field col s6">
+						          <input id="test" type="number" class="validate" ng-model="metaData.test">
+						          <label for="test">Test</label>
+						        </div>
+						        <div class="input-field col s6">
+						          <input id="size_cube" type="number" class="validate" ng-model="metaData.size">
+						          <label for="size_cube">Tamaño de Cubo</label>
+						        </div>
+							</div>
+							<div class="row">
+								<div class="col s12">
+									<div class="row" ng-repeat="obj in operations">
+										
+										<div class="input-field col s4">
+											<select class="browser-default" ng-options="item for item in optionSelect"
+											ng-model="obj.operation"></select>
+										</div>
+										<div class="input-field col s4">
+											<input id="numbers_operation" type="text" class="validate" ng-model="obj.numbers">
+						          			<label for="numbers_operation">1 1 1 3 3 3 5</label>
+										</div>
+									</div>
+									
+											
+						        </div>
+						        <div class="col s12">
+									<div class="row">
+										<div class="input-field  col s6">
+											<a 
+											class="btn-floating btn-large waves-effect waves-light deep-orange lighten-2 tooltipped" 
+  											data-position="right" 
+  											data-delay="50" 
+  											data-tooltip="Agregar nueva prueba"
+  											ng-click="addOperation()">
+  											<i class="material-icons">add</i>
+											</a>
+										</div>    
+										<div class="input-field  col s6">
+											<a 
+											class="btn-floating btn-large waves-effect waves-light deep-orange lighten-2 tooltipped" 
+  											data-position="right" 
+  											data-delay="50" 
+  											data-tooltip="Remover prueba"
+  											ng-click="removeOperation()">
+  											<i class="material-icons">trending_down</i>
+											</a>
+										</div>
+									</div>
+						        </div>
+							</div>
+						</form>
+					</div>
+					<div class="card-action">
+		              <button class="btn waves-effect waves-light deep-orange lighten-2" ng-click="execute()">Calcular<i class="material-icons right">swap_horiz</i></button>
+					</div>
+				</div>
+			</div>
+			<!--Respuestas-->
+			<div class="col l5 m5 ">
+				<div class="card blue-grey darken-1">
+		            <div class="card-content white-text">
+		              <span class="card-title">Resultados</span>
+		              <p>En esta sección se presentan los resultados de cada test</p>
+		               Metadata: {{metaData}}
+		               Operations: {{operations}}
+		            </div>
+		        </div>
+			</div>
+		</div>
+	<!-- </div> -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="scripts/libs/angular.min.js"></script>
+    <script type="text/javascript" src="scripts/libs/materialize.min.js"></script>
+    <script type="text/javascript" src="scripts/app.js"></script>
+    <script type="text/javascript" src="scripts/services/CubeService.js"></script>
+    <script type="text/javascript" src="scripts/controllers/CubeController.js"></script>
+	<script>
+		$(document).ready(function() {
+		    $('select').material_select();
+		});
+	</script>
+</body>
+</html>
