@@ -15,6 +15,7 @@ app.controller('CubeController', ['$scope', 'cubeService',
 
 		$scope.execute = function() {
 			cubeService.init($scope.metaData, $scope.operations)
+			cubeService.evalOperations()
 		}
 
 	}
