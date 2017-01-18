@@ -11,7 +11,7 @@ app.controller('CubeController', ['$scope', 'cubeService',
 
 		// Este objeto guarda metadatos del problema, como el tamaño del cubo y el numero de tests.
 		$scope.metaData = {}
-		/* En este array se guardan las operacion que se van a realiazar en un test, sus elementos son objetos js
+		/** En este array se guardan las operacion que se van a realiazar en un test, sus elementos son objetos js
 		este array lucirá así: 
 		[
 		 	{"operation":"UPDATE", "numbers":"1 1 1 45"}, 
@@ -20,7 +20,7 @@ app.controller('CubeController', ['$scope', 'cubeService',
 		 	{"operation":"QUERY", "numbers":"1 1 1 2 2 2"}
 		]
 		Para obtener la cantidad de operaciones que se realiazará, basta con obtener el tamaño del arreglo anterior.
-		/* 
+		*/ 
 		$scope.operations = [{"operation": "UPDATE"}]
 		$scope.optionSelect = ['UPDATE', 'QUERY'] // array simple para mostrar las opciones de campo select del formulario
 		$scope.solution = [] // donde se guardará la solución
@@ -47,6 +47,7 @@ app.controller('CubeController', ['$scope', 'cubeService',
 		 * establecidos por el usuario]
 		 */
 		$scope.resetSolution = function() {
+			$scope.metaData.test-- // El número de test disminuye, pues ya se ha ejecutado uno.
 			if($scope.metaData.test < 0) {
 				$scope.solution = []
 			}
@@ -58,9 +59,20 @@ app.controller('CubeController', ['$scope', 'cubeService',
 		 * desde la vista. Esta función se ejecuta cuando el usuario hace click en el botón "Calcular"]
 		 */
 		$scope.execute = function() {
-			cubeService.init($scope.metaData, $scope.operations, $scope.solution)
-			cubeService.evalOperations()
-			$scope.metaData.test-- // El número de test disminuye, pues ya se ha ejecutado uno.
+			cubeService.init($scope.metaData, $scope.solution)
+			try{
+				for (var i in $scope.operations) {
+					if($scope.operations[i].operation == "UPDATE") {
+						cubeService.update($scope.operations[i].numbers)
+					}
+					else {
+						cubeService.query($scope.operations[i].numbers)
+					}
+				}
+			}
+			catch(error){
+				alert("¡Vaya!, un error ha ocurrido: "+error)
+			}
 			$scope.resetSolution()
 		}
 

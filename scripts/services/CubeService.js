@@ -11,7 +11,6 @@ app.service('cubeService',
 		var cubeService = {}
 		var matrix = []
 		var size
-		var operations
 		var solution
 
 		/**
@@ -19,20 +18,17 @@ app.service('cubeService',
 		 * que el CubeController le envia y además, se encarga de hacer el llamado a la creacion del Cubo.]
 		 * @param  {[Objetc]} objMetaData     [Objeto con metadatos de tamaño de cubo y numero de tests. El 
 		 * siguiente es un ejemplo de como luce este objeto: {"test":"2", "size": "4"} ]
-		 * @param  {[Array]} arrayOperations [Array que contiene objetos para las operaciones. EL siguiente
-		 *  es un ejemplo de como luce este array: [{"operation":"UPDATE", "numbers":"1 2 1 34"}, {"operation":"QUERY","numbers":"1 1 1 2 2 2"}] ]
 		 * @param  {[Array]} arraySolution  [Array que va a almacenar las soluciones para posteriormente mostrarlas
 		 *  en la vista]
 		 */
-		cubeService.init = function(objMetaData, arrayOperations, arraySolution) {
+		cubeService.init = function(objMetaData, arraySolution) {
 			size = objMetaData.size
-			operations = arrayOperations
 			solution = arraySolution
 			cubeService.createCube()
 		}
 
 		/**
-		 * [createCube Crea una matrix en 3d (El Cubo) e inicializa todas sus celdas con el valor de
+		 * [createCube Crea una matriz en 3d (El Cubo) e inicializa todas sus celdas con el valor de
 		 * cero]
 		 */
 		cubeService.createCube = function() {
@@ -58,27 +54,6 @@ app.service('cubeService',
 				alert("¡Vaya!, un error ha ocurrido: "+error)
 			}
 		}//Fin createCube
-
-		/**
-		 * [evalOperations Esta función se encarga de verificar cuales datos se envian a las funciones update
-		 * o query, puesto que la información que necesita cada función es diferente (e.g. update solo necesita
-		 * cuatro númeors, mientras que query necesita 6)]
-		 */
-		cubeService.evalOperations = function() {
-			try{
-				for (var i in operations) {
-					if(operations[i].operation == "UPDATE") {
-						cubeService.update(operations[i].numbers)
-					}
-					else {
-						cubeService.query(operations[i].numbers)
-					}
-				}
-			}
-			catch(error){
-				alert("¡Vaya!, un error ha ocurrido: "+error)
-			}
-		}
 
 		/**
 		 * [convertNumbers Función auxiliar que se encarga de convertir una cadena de numeros
