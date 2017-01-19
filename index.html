@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="CubeSummation">
 <head>
-	<!--Import Google Icon Font-->
-	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import Font Awesome Icon Font-->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.css">
 	<!--Import materialize.css-->
 	<link type="text/css" rel="stylesheet" href="styles/materialize.min.css"  media="screen,projection"/>
 
@@ -71,7 +71,7 @@
   											data-tooltip="Agregar nueva prueba"
   											ng-click="addOperation()"
   											ng-disabled="operations.length >= 1000">
-  											<i class="material-icons">add</i>
+  											<i class="fa fa-plus" aria-hidden="true"></i>
 											</a>
 										</div>    
 										<div class="input-field  col s6">
@@ -81,7 +81,7 @@
   											data-delay="50" 
   											data-tooltip="Remover prueba"
   											ng-click="removeOperation()">
-  											<i class="material-icons">trending_down</i>
+  											<i class="fa fa-minus" aria-hidden="true"></i>
 											</a>
 										</div>
 									</div>
@@ -92,7 +92,7 @@
 					<div class="card-action">
 		              <button class="btn waves-effect waves-light deep-orange lighten-2" 
 		              ng-click="execute()"
-		              ng-disabled="metaData.test <= 0">Calcular<i class="material-icons right">swap_horiz</i></button>
+		              ng-disabled="metaData.test <= 0">Calcular<i class="fa fa-exchange right" aria-hidden="true"></i></button>
 					</div>
 				</div>
 			</div>
